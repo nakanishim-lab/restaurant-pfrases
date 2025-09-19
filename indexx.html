@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レストラン予約・注文フレーズ練習</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .phrase-container {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .phrase-text {
+            flex-grow: 1;
+            font-size: 1.1em;
+            line-height: 1.4;
+        }
+        .speak-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        .speak-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>レストラン予約・注文フレーズ練習</h1>
+
+    <div id="phrases-list"></div>
+
+    <script>
+        const phrases = [
+            "14. I have a reservation at 7 for 3 people. / I made a reservation under [name].",
+            "15. Table for 1/2/3, please.",
+            "16. Right this way! / Please wait here for a moment.",
+            "17. Here is your menu! Take your time.",
+            "18. What would you like to drink? / Can I start you off with anything to drink?",
+            "19. I’d like [drink}. / Could I have [drink]. / I’ll have [drink]. / May I have [drink].",
+            "20. Sure, would you like any appetizers? / Do you want to start with an appetizer?",
+            "21. Yes, can I have [food]. / No, not today. / No thank you.",
+            "22. No problem, can I get you anything else? / Are you ready to order?",
+            "23. Can I get [food]? / I’ll take [food]. / What do you recommend? / Oh, I haven’t decided yet!",
+            "24. Great, anything else? / Okay, I’ll come back!",
+            "25. How is everything tasting? / Is everything okay?",
+            "26. Everything is great/delicious. / Actually, we haven’t gotten our [food]."
+        ];
+
+        const phrasesList = document.getElementById('phrases-list');
+
+        phrases.forEach(phrase => {
+            const phraseContainer = document.createElement('div');
+            phraseContainer.classList.add('phrase-container');
+
+            const phraseText = document.createElement('span');
+            phraseText.classList.add('phrase-text');
+            phraseText.textContent = phrase;
+            phraseContainer.appendChild(phraseText);
+
+            const speakButton = document.createElement('button');
+            speakButton.classList.add('speak-button');
+            speakButton.textContent = 'Speak';
+            speakButton.addEventListener('click', () => {
+                const utterance = new SpeechSynthesisUtterance(phrase);
+                utterance.lang = 'en-US'; 
+                window.speechSynthesis.speak(utterance);
+            });
+            phraseContainer.appendChild(speakButton);
+
+            phrasesList.appendChild(phraseContainer);
+        });
+    </script>
+
+</body>
+</html>
